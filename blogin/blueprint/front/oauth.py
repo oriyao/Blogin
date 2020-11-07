@@ -15,8 +15,10 @@ from blogin.extension import db, oauth
 
 github = oauth.remote_app(
     name='github',
-    consumer_key=os.getenv('GITHUB_CLIENT_ID'),
-    consumer_secret=os.getenv('GITHUB_CLIENT_SECRET'),
+    consumer_key='GITHUB_CLIENT_ID',
+    consumer_secret='GITHUB_CLIENT_SECRET',
+    #consumer_key=os.getenv('GITHUB_CLIENT_ID'),
+    #consumer_secret=os.getenv('GITHUB_CLIENT_SECRET'),
     request_token_params={'scope': 'user'},
     base_url='https://api.github.com',
     request_token_url=None,

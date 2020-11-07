@@ -34,7 +34,8 @@ class BaseConfig:
     BLOGIN_COMMENT_PER_PAGE = 10
     BLOGIN_PHOTO_PER_PAGE = 12
     LOGIN_LOG_PER_PAGE = 20
-    SECRET_KEY = os.getenv('SECRET_KEY')
+    SECRET_KEY = 'oriyao'
+    #SECRET_KEY = os.getenv('SECRET_KEY')
     JSON_AS_ASCII = False
     BLOGIN_MAIL_SUBJECT_PRE = '[Blogin]'
 
@@ -92,8 +93,9 @@ class TestingConfig(BaseConfig):
 
 
 class ProductionConfig(BaseConfig):
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://{}:{}@localhost/blog?charset=utf8'.format(BaseConfig.DATABASE_USER,
-                                                                                         BaseConfig.DATABASE_PWD)
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///data-dev.db'
+    #SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://{}:{}@localhost/blog?charset=utf8'.format(BaseConfig.DATABASE_USER,
+    #                                                                                     BaseConfig.DATABASE_PWD)
     REDIS_URL = "redis://localhost"
 
 

@@ -66,14 +66,17 @@ def statistic_traffic(db, obj):
     def decorator(func):
         @wraps(func)
         def decorated_function(*args, **kwargs):
-            td = datetime.today().strftime('%Y-%m-%d')
-            vst = obj.query.filter_by(date=td).first()
-            if vst is None:
-                new_vst = obj(date=td, times=1)
-                db.session.add(new_vst)
-            else:
-                vst.times += 1
-            db.session.commit()
+            #td = datetime.today().strftime('%Y-%m-%d')
+            #vst = obj.query.filter_by(date=td).first()
+            #if vst is None:
+                #new_vst = obj(date=td, times=1)
+                #db.session.add(new_vst)
+            #    print('test')
+            #else:
+            #    pass
+                #vst.times += 1
+            #db.session.commit()
+            pass
             return func(*args, **kwargs)
         return decorated_function
     return decorator

@@ -6,10 +6,10 @@
 @File    : decorators
 @Software: PyCharm
 """
-from datetime import datetime
+import datetime
 from functools import wraps
 
-from flask import Markup, flash, url_for, redirect, abort
+from flask import Markup, flash, url_for, redirect, abort,current_app,request
 from flask_login import current_user
 
 
@@ -66,16 +66,17 @@ def statistic_traffic(db, obj):
     def decorator(func):
         @wraps(func)
         def decorated_function(*args, **kwargs):
-            #td = datetime.today().strftime('%Y-%m-%d')
-            #vst = obj.query.filter_by(date=td).first()
-            #if vst is None:
-                #new_vst = obj(date=td, times=1)
-                #db.session.add(new_vst)
-            #    print('test')
-            #else:
-            #    pass
-                #vst.times += 1
-            #db.session.commit()
+            # 类型不能为str类型，后续可以考虑将数据库中格式修改为text
+            td= datetime.datetime.strptime(datetime.datetime.today().strftime('%Y-%m-%d'), "%Y-%m-%d")
+            vst = obj.query.filter_by(date=td.strftime('%Y-%m-%d')).first()
+            if vst is None:
+                current_app.logger.info('新的一天开始了: ' + request.remote_addr + '第一个访问了openstack.top')
+                new_vst = obj(date=td, times=1)
+                db.session.add(new_vst)
+            else:
+                current_app.logger.info('老日期，访问次数加1 : ' + str(td))
+                vst.times += 1
+            db.session.commit()
             pass
             return func(*args, **kwargs)
         return decorated_function

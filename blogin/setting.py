@@ -1,10 +1,10 @@
 """
 # coding:utf-8
-@Time    : 2020/9/21
-@Author  : jiangwei
-@mail    : jiangwei1@kylinos.cn
+@Time    : 2020/11/07
+@Author  : oriyao
+@mail    : ylzhangyao@gmail.com
 @File    : setting
-@Software: PyCharm
+@Describe: 配置文件
 """
 import os
 import sys

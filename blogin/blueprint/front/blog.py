@@ -35,7 +35,7 @@ def index():
         loves = 0
     else:
         loves = loves.counts
-    su = User.query.filter(User.email == '804022023@qq.com').first()
+    su = User.query.filter(User.email == 'oriyao@163.com').first()
     flinks = FriendLink.query.filter(FriendLink.flag == 1).all()
     return render_template('main/index.html', per_page=current_app.config['BLOGIN_BLOG_PER_PAGE'],
                            pagination=pagination, blogs=blogs, cates=cates, categories=categories,
@@ -46,6 +46,7 @@ def index():
 def blog_article(blog_id):
     blog = Blog.query.get_or_404(blog_id)
     blog.read_times += 1
+    current_app.logger.info(request.remote_addr + ' Read blog : ' + str(blog_id))
     replies = []
     cate = BlogType.query.filter_by(id=blog.type_id).first()
     # 顶级评论

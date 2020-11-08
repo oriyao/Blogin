@@ -1,10 +1,10 @@
 """
 # coding:utf-8
-@Time    : 2020/9/21
-@Author  : jiangwei
-@mail    : jiangwei1@kylinos.cn
+@Time    : 2020/11/07
+@Author  : oriyao
+@mail    : ylzhangyao@gmail.com
 @File    : __init__.py
-@Software: PyCharm
+@Describe: Flask 入口文件
 """
 from logging.handlers import RotatingFileHandler
 
@@ -182,7 +182,7 @@ def register_cmd(app: Flask):
         db.session.commit()
         print('添加成功')
 
-
+# Log
 def register_log(app: Flask):
     app.logger.setLevel(logging.DEBUG)
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')

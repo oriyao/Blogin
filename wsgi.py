@@ -1,10 +1,10 @@
 """
 # coding:utf-8
-@Time    : 2020/10/12
-@Author  : jiangwei
-@mail    : jiangwei1@kylinos.cn
+@Time    : 2020/11/07
+@Author  : oriyao
+@mail    : ylzhangyao@gmail.com
 @File    : wsgi
-@Software: PyCharm
+@Describe: Flask 入口文件
 """
 from blogin import create_app
 

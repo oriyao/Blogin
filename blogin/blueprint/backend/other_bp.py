@@ -9,7 +9,7 @@
 import os
 from datetime import datetime
 from bs4 import BeautifulSoup
-from flask import Blueprint, render_template, send_from_directory, request, flash, redirect, url_for, jsonify
+from flask import current_app,Blueprint, render_template, send_from_directory, request, flash, redirect, url_for, jsonify
 from flask_login import current_user, login_required
 
 from blogin.blueprint.backend.forms import TimelineForm, AddFlinkForm
@@ -115,10 +115,11 @@ def activate_tm(tm_id):
 def look_logs():
     logs = []
     app_log_path = basedir + '/logs/'
-    nginx_log_path = '/var/log/nginx/'
+    current_app.logger.info(' basedir : ' + str(basedir))
+    # nginx_log_path = '/var/log/nginx/'
     # 运行日志
     get_log_file_info(app_log_path, logs)
-    get_log_file_info(nginx_log_path, logs, log_cate='nginx access/error 文件日志!')
+    # get_log_file_info(nginx_log_path, logs, log_cate='nginx access/error 文件日志!')
     return render_template('backend/logs.html', logs=logs)
 
 
@@ -135,8 +136,11 @@ def log_detail(file_path):
     显示日志文件内容
     :param file_path: 日志文件路径
     :return: 日志文件详细内容页面
+    : backend/logs/detail//app/logs/blogin.log/
     """
     contents = []
+    current_app.logger.info(' file_path : ' + str(file_path))
+    #with open('/' + file_path) as f:
     with open('/' + file_path) as f:
         for line in f.readlines():
             line.strip('\n')

@@ -1,0 +1,1 @@
+日志打印调用：current_app.logger.info('statistic_traffic td : ' + str(td))

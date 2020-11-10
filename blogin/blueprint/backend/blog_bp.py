@@ -44,9 +44,13 @@ def blog_create():
         current_time = current_time.split(' ')[0]
         create_path(basedir + '/uploads/image/' + current_time)
         # 将博客示例图片存储到对应的文件夹中
-        form.blog_img_file.data.save(basedir + '/uploads/image/' + current_time + '/' + filename)
-        blog_img_path = '/backend/blog/img/' + current_time + '/' + filename
-
+        # form.blog_img_file.data.save(basedir + '/uploads/image/' + current_time + '/' + filename)
+        if filename !='':
+            form.blog_img_file.data.save(basedir + '/uploads/image/' + current_time + '/' + filename)
+            blog_img_path = '/backend/blog/img/' + current_time + '/' + filename
+        else:
+            current_app.logger.info('Use default blog pic:openstack.png')
+            blog_img_path = '/backend/blog/img/default/openstack.png'
         cate = BlogType.query.filter_by(id=type).first()
         state = States.query.get_or_404(1)
         blg = Blog(title=title, type_id=cate.id, introduce=introduce, content=content, pre_img=blog_img_path,

@@ -26,7 +26,7 @@ class PostForm(FlaskForm):
                              default=1, coerce=int)
     brief_content = TextAreaField(u'博客简介', validators=[DataRequired()])
     blog_img_file = FileField(label=u'博客示例图',
-                              validators=[DataRequired(), FileAllowed(['png', 'jpg'], '只接收png和jpg图片')],
+                              validators=[FileAllowed(['png', 'jpg'], '只接收png和jpg图片')],
                               render_kw={'value': "上传", 'class': 'btn btn-default'})
     body = CKEditorField('Body', validators=[DataRequired(message='请输入博客内容')])
     submit = SubmitField(u'发布博客')

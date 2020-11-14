@@ -41,6 +41,27 @@ def index():
                            pagination=pagination, blogs=blogs, cates=cates, categories=categories,
                            loves=loves, su=su, flinks=flinks)
 
+@blog_bp.route('/oriyao_index/', methods=['GET'])
+@statistic_traffic(db, VisitStatistics)
+def oriyao_index():
+    page = request.args.get('page', 1, type=int)
+    pagination = Blog.query.filter_by(delete_flag=1).order_by(Blog.create_time.desc()).\
+        paginate(page, per_page=current_app.config['BLOGIN_BLOG_PER_PAGE'])
+    blogs = pagination.items
+    cates = []
+    for blog in blogs:
+        cates.append(BlogType.query.filter_by(id=blog.type_id).first().name)
+    categories = BlogType.query.all()
+    loves = LoveMe.query.first()
+    if loves is None:
+        loves = 0
+    else:
+        loves = loves.counts
+    su = User.query.filter(User.email == 'oriyao@163.com').first()
+    flinks = FriendLink.query.filter(FriendLink.flag == 1).all()
+    return render_template('oriyao/oriyao_index.html', per_page=current_app.config['BLOGIN_BLOG_PER_PAGE'],
+                           pagination=pagination, blogs=blogs, cates=cates, categories=categories,
+                           loves=loves, su=su, flinks=flinks)
 
 @blog_bp.route('/blog/article/<blog_id>/')
 def blog_article(blog_id):

@@ -65,14 +65,15 @@
             <h5 class="widget-title mb-10">Categories</h5>
             <div class="bt-1 border-color-1"></div>
         </div>
+        <!--        文章分类-->
         <div class="post-block-list post-module-1 post-module-5">
             <ul>
-                <li class="cat-item cat-item-2"><a href="category.html">Beauty</a> (3)</li>
-                <li class="cat-item cat-item-3"><a href="category.html">Book</a> (6)</li>
-                <li class="cat-item cat-item-4"><a href="category.html">Design</a> (4)</li>
-                <li class="cat-item cat-item-5"><a href="category.html">Fashion</a> (3)</li>
-                <li class="cat-item cat-item-6"><a href="category.html">Lifestyle</a> (6)</li>
-                <li class="cat-item cat-item-7"><a href="category.html">Travel</a> (2)</li>
+                {% for category in categories %}
+                <li class="cat-item cat-item-2">
+                    <a href="/blog/cate/{{ category.id }}/">{{ category.name }}</a>
+                    {{ category.counts }}
+                </li>
+                {% endfor %}
             </ul>
         </div>
     </div>

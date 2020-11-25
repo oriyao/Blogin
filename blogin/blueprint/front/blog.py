@@ -1,8 +1,8 @@
 """
 # coding:utf-8
-@Time    : 2020/9/21
-@Author  : jiangwei
-@mail    : jiangwei1@kylinos.cn
+@Time    : 2020/11/15
+@Author  : oriyao
+@mail    : ylzhangyao@gmail.com
 @File    : blog_bp
 @Software: PyCharm
 """
@@ -59,7 +59,7 @@ def oriyao_index():
         loves = loves.counts
     su = User.query.filter(User.email == 'oriyao@163.com').first()
     flinks = FriendLink.query.filter(FriendLink.flag == 1).all()
-    return render_template('oriyao/main.html', per_page=current_app.config['BLOGIN_BLOG_PER_PAGE'],
+    return render_template('oriyao/main_home.html', per_page=current_app.config['BLOGIN_BLOG_PER_PAGE'],
                            pagination=pagination, blogs=blogs, cates=cates, categories=categories,
                            loves=loves, su=su, flinks=flinks)
 

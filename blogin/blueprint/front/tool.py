@@ -11,7 +11,7 @@ import os
 import random
 
 from PIL import Image
-from flask import Blueprint, render_template, request, jsonify, send_from_directory, flash, abort
+from flask import Blueprint, render_template, request, jsonify, send_from_directory, flash, abort,current_app
 from sqlalchemy.sql.expression import func
 from blogin.setting import basedir
 from blogin.utils import allow_img_file, OCR, IPQuery, IP_REG, WordCloud, GoogleTranslation, TRAN_LANGUAGE, \
@@ -61,7 +61,8 @@ def ocr():
         c_ocr = OCR(filename=basedir + r'/uploads/ocr/' + filename, category=category)
         nums, texts = ocr_result(category, c_ocr)
         return jsonify({'tag': 1, 'nums': nums, 'texts': texts, 'img': img_url})
-    return render_template("main/tool/ocr.html")
+    testenv = current_app.config['TESTENV']
+    return render_template("main/tool/ocr.html",testenv=testenv)
 
 
 @tool_bp.route('/query-ip/', methods=['GET', 'POST'])

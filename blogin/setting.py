@@ -28,7 +28,8 @@ class Operators:
 
 
 class BaseConfig:
-
+    TESTENV=os.getenv('TESTENV','from baseconfig')
+    MONGO_URI =os.getenv('MONGO_URI','mongodb://username:userpassword@ip:port/dbname?authSource=admin')
     # Paginate configure
     BLOGIN_BLOG_PER_PAGE = 8
     BLOGIN_COMMENT_PER_PAGE = 10
